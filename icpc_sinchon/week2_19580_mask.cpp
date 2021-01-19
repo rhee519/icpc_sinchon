@@ -3,7 +3,7 @@
 #include <algorithm>
 
 using namespace std;
-#define SIZE        10 + 1
+#define SIZE        500'000 + 1
 
 bool myComp(pair<long long, long long> p1, pair<long long, long long> p2) {
     // compare function for citizen info
@@ -21,7 +21,16 @@ int count(int n) {
     sort(r, r+n, myComp);   // sort citizen information in myComp-order
     // map is sorted in key-ascending-order
     for(int i = 0; i < n; i++) {
-        
+        map<long long, int>::iterator it = mask.lower_bound(r[i].first);
+        if(it == mask.end()) {
+            // this citizen cannot buy any mask
+            continue;
+        }
+        if(it->first <= r[i].second) {
+            // this citizen can buy a mask
+            it->second--; cnt++;
+            if(it->second == 0) mask.erase(it);
+        }
     }
     
     
