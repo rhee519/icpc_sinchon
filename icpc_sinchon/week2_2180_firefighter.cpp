@@ -22,7 +22,6 @@ int getTotalTime(int n) {
     
     sort(arr, arr+n);
     // sort in descending order by a/b
-    
     for(int i = 0; i < n; i++) {
         total_time += arr[i].a * total_time + arr[i].b;
         total_time %= 40'000;

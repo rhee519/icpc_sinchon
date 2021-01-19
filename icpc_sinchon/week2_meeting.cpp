@@ -21,7 +21,6 @@ int count(int n) {
     
     // sort by start_time & end_time
     sort(m, m + n, myComp);
-    
     for(int i = 0; i < n; i++) {
         if(m[i].start < current_time) continue;
         current_time = m[i].end;
