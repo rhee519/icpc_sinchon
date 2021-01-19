@@ -4,7 +4,6 @@
 using namespace std;
 #define SIZE        100'000 + 1
 
-// bool docked[SIZE];
 int gate[SIZE];
 
 void init(int g) {
