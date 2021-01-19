@@ -1,8 +1,9 @@
-//
-//  week2_19580_mask.cpp
-//  icpc_sinchon
-//
-//  Created by Jiho Rhee on 2021/01/19.
-//
+#include <iostream>
+#include <map>
 
-#include <stdio.h>
+using namespace std;
+
+int main( ) {
+    
+    return 0;
+}
