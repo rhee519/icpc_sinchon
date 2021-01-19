@@ -2,7 +2,6 @@
 #include <algorithm>
 
 #define SIZE        100'000 + 1
-
 using namespace std;
 
 unsigned long long arr[SIZE];
