@@ -1,7 +1,7 @@
 #include <iostream>
 
 using namespace std;
-#define SIZE        10 + 1
+#define SIZE        500'000 + 1
 
 int root[SIZE];
 int depth[SIZE];
@@ -30,11 +30,13 @@ void merge(int x, int y) {
 
 int result(int n, int m) {
     int x, y;
+    init(n);
+    
     for(int cnt = 1; cnt <= m; cnt++) {
         cin >> x >> y;
-        merge(x, y);
         if(find(x) == find(y))
             return cnt;
+        merge(x, y);
     }
     
     return 0;
