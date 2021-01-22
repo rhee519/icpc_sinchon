@@ -2,7 +2,6 @@
 #include <algorithm>
 
 using namespace std;
-
 #define VERTEX_NUM      1000 + 1
 #define EDGE_NUM        100'000 + 1
 
