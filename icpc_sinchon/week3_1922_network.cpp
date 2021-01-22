@@ -3,8 +3,8 @@
 
 using namespace std;
 
-#define VERTEX_NUM      10 + 1
-#define EDGE_NUM        10 + 1
+#define VERTEX_NUM      1000 + 1
+#define EDGE_NUM        100'000 + 1
 
 struct edge{
     int from, to;
@@ -36,6 +36,16 @@ void merge(int x, int y) {
 
 int costByKruskal(int n, int m) {
     int cost = 0;
+    int cnt = 0;
+    sort(e, e+m); // sort in cost-nondecreasing order
+    
+    for(int i = 0; i < m; i++) {
+        int from = find(e[i].from);
+        int to = find(e[i].to);
+        if(from == to) continue; // do not include in MST
+        merge(from, to); cnt++; cost += e[i].cost;
+        if(cnt == n-1) break;
+    }
     
     return cost;
 }
@@ -51,6 +61,7 @@ int main( ) {
         cin >> e[i].from >> e[i].to >> e[i].cost;
     }
     
+    init(n);
     cost = costByKruskal(n, m);
     cout << cost << '\n';
     
