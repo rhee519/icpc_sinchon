@@ -2,14 +2,14 @@
 #include <algorithm>
 
 using namespace std;
-#define SIZE        10 + 1
+#define SIZE        100'000 + 1
 
 struct line{
     int idx;
     int x1, x2;
     
     bool operator<(const line &other) const{
-        if(x1 == other.x1) return (x1 < x2);
+        if(x1 == other.x1) return (x2 < other.x2);
         return x1 < other.x1;
     }
 };
@@ -17,20 +17,31 @@ struct line{
 int parent[SIZE];
 line arr[SIZE];
 
+int find(int x) {
+    if(parent[x] == x) return x;
+    return parent[x] = find(parent[x]);
+}
+
+void group(int x, int y) {
+    x = find(x); y = find(y);
+    parent[y] = x;
+}
+
 void connect(int n) {
     sort(arr+1, arr+n+1); // sort arr[1~n] in non-decreasing order by x1 & x2
+    parent[arr[1].idx] = arr[1].idx;
     
-    parent[arr[1].idx] = 1;
     for(int i = 2; i <= n; i++) {
-        if(arr[i-1].x2 >= arr[i].x1) // connected
-            parent[arr[i].idx] = parent[arr[i-1].idx];
-        else // not connected
-            parent[arr[i].idx] = parent[arr[i-1].idx] + 1;
+        parent[arr[i].idx] = arr[i].idx;
+        if(arr[i-1].x2 >= arr[i].x1) { // connected
+            group(arr[i-1].idx, arr[i].idx);
+            arr[i].x2 = max(arr[i-1].x2, arr[i].x2); // update rightmost point
+        }
     }
 }
 
 bool canJump(int idx1, int idx2) {
-    return parent[idx1] == parent[idx2];
+    return find(idx1) == find(idx2);
 }
 
 int main( ) {
