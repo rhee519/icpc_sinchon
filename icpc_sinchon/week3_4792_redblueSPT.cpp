@@ -2,8 +2,8 @@
 #include <algorithm>
 
 using namespace std;
-#define VER_NUM         10 + 1
-#define EDGE_NUM        10 + 1
+#define VER_NUM         1000 + 1
+#define EDGE_NUM        1'000'000 + 1
 
 struct edge{
     int cost; // red : 0, blue : 1
@@ -39,6 +39,7 @@ int minCost(int n, int m) {
     int cost = 0;
     int cnt = 0;
     int from, to;
+    init(n);
     for(int i = 0; i < m; i++) {
         from = find(e[i].from); to = find(e[i].to);
         if(from == to) continue;    // do not include in MST
@@ -55,6 +56,7 @@ int maxCost(int n, int m) {
     int cost = 0;
     int cnt = 0;
     int from, to;
+    init(n);
     for(int i = m-1; i >= 1; i--) {
         from = find(e[i].from); to = find(e[i].to);
         if(from == to) continue;    // do not include in MST
@@ -81,7 +83,6 @@ int main( ) {
             else if(ch == 'B') e[i].cost = 1;
         }
         
-        init(n);
         sort(e, e+m); // sort in cost-nondecreasing order
         int minC = minCost(n, m);
         int maxC = maxCost(n, m);
