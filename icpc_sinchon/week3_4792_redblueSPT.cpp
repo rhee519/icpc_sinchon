@@ -34,24 +34,41 @@ void merge(int x, int y) {
 }
 
 int minCost(int n, int m) {
+    // Minimum Spanning Tree by Kruskal's Algorithm
     // e is already sorted in cost-nondecreasing order
     int cost = 0;
     int cnt = 0;
+    int from, to;
     for(int i = 0; i < m; i++) {
-        
+        from = find(e[i].from); to = find(e[i].to);
+        if(from == to) continue;    // do not include in MST
+        merge(from, to); cnt++; cost += e[i].cost;
+        if(cnt == n-1) break;
     }
     
     return cost;
 }
 
 int maxCost(int n, int m) {
+    // Maximum Spanning Tree by Kruskal's Algorithm
     // e is already sorted in cost-nondecreasing order
     int cost = 0;
+    int cnt = 0;
+    int from, to;
+    for(int i = m-1; i >= 1; i--) {
+        from = find(e[i].from); to = find(e[i].to);
+        if(from == to) continue;    // do not include in MST
+        merge(from, to); cnt++; cost += e[i].cost;
+        if(cnt == n-1) break;
+    }
     
     return cost;
 }
 
 int main( ) {
+    ios_base::sync_with_stdio(false); cin.tie(NULL);
+    freopen("input.txt", "r", stdin);
+    
     int n, m, k;
     char ch;
     while(true) {
@@ -64,6 +81,7 @@ int main( ) {
             else if(ch == 'B') e[i].cost = 1;
         }
         
+        init(n);
         sort(e, e+m); // sort in cost-nondecreasing order
         int minC = minCost(n, m);
         int maxC = maxCost(n, m);
