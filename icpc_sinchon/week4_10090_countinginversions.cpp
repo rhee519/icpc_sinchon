@@ -20,8 +20,8 @@ int dnc(int left, int right) {
     // with arr[i] in left array & arr[j] in right array
     // O(N)
     for(i = left; i <= mid; i++) {
-        while(arr[i] > arr[j] && j <= right) j++;
-        j--; // j : last idx with arr[i] > arr[j]
+        if(arr[i] <= arr[j]) continue;
+        while(arr[i] > arr[j+1] && j < right) j++;
         ret += j-mid;
     }
     
@@ -55,12 +55,15 @@ int main( ) {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
     freopen("input.txt", "r", stdin);
     
-    int n;
+    int n, ans;
+    
     cin >> n;
     for(int i = 0; i < n; i++) {
         cin >> arr[i];
     }
     
+    ans = dnc(0, n-1);
+    cout << ans << '\n';
     
     return 0;
 }
