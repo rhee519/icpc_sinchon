@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 #define VERTEX_NUM      10 + 1
@@ -12,35 +13,13 @@ struct edge{
     }
 };
 
-int root[VERTEX_NUM];
-edge e[EDGE_NUM];
-
-void init(int n) {
-    for(int i = 1; i <= n; i++) {
-        root[i] = i;
-    }
-}
-
-int find(int x) {
-    if(root[x] == x) return x;
-    return root[x] = find(root[x]);
-}
-
-void merge(int x, int y) {
-    x = find(x); y = find(y);
-    root[y] = x;
-}
-
-int minCostByKruskal(int n, int m, int k) {
-    int minCost = 0;
-    
-    return minCost;
-}
+bool planted[VERTEX_NUM];
 
 int main( ) {
     ios_base::sync_with_stdio(false); cin.tie(NULL);
     freopen("input.txt", "r", stdin);
-    int n, m, k;
+    
+    int n, m, k; // k <= n
     int plant;   // not used
     int minCost;
     cin >> n >> m >> k;
@@ -48,10 +27,10 @@ int main( ) {
         cin >> plant;
     }
     for(int i = 0; i < m; i++) { // edge input
-        edge e; cin >> e.start >> e.end >> e.cost;
+        
     }
     
-    minCost = minCostByKruskal(n, m, k);
+    
     cout << minCost << '\n';
     
     return 0;
